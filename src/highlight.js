@@ -12,6 +12,7 @@ Prism.languages['oal'] = {
         greedy: true,
         alias: 'comment'
     },
+    'property': /'[0-9a-zA-Z$@_-]+/,
     'builtin': /\b(num|str|uri|bool|int)\b/,
     'content-meta': {
         pattern: /\b(media|headers|status)\b/,
@@ -28,7 +29,6 @@ Prism.languages['oal'] = {
         pattern: /\/[0-9a-zA-Z%~_.-]*/,
         alias: 'url'
     },
-    'property': /'[0-9a-zA-Z$@_-]+/,
     'ref-variable': {
         pattern: /@[0-9a-zA-Z$_-]+/,
         alias: 'variable'

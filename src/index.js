@@ -11,7 +11,10 @@ import "prismjs/components/prism-yaml";
 import "prismjs/themes/prism-okaidia.css";
 import "./highlight.js";
 
-Prism.manual = true;
+import example from './example.txt';
+
+const REFRESH_TIMEOUT_MS = 1000;
+const POLL_PERIOD_MS = 500;
 
 const highlightOAL = editor => {
     editor.innerHTML = Prism.highlight(editor.textContent, Prism.languages.oal, 'oal')
@@ -31,29 +34,32 @@ const outputJar = new CodeJar(output, highlightYAML, options);
 
 const diagnostics = document.querySelector("#diagnostics");
 
-inputJar.updateCode("res / on get -> {};");
+inputJar.updateCode(example);
 
-let isStale = true;
+let lastUpdate = Date.now();
+let lastRefresh = lastUpdate;
 
 input.addEventListener("input", () => {
-    isStale = true;
+    lastUpdate = Date.now();
 });
 
 function refresh() {
-    isStale = false;
+    lastRefresh = Date.now();
     let code = inputJar.toString();
     let result = wasm.compile(code);
-    outputJar.updateCode(result.api);
+    if (result.error === "") {
+        outputJar.updateCode(result.api);
+    }
     diagnostics.innerHTML = result.error;
 }
 
 function loop() {
     setTimeout(() => {
-        if (isStale) {
+        if (lastUpdate > lastRefresh && (Date.now() - lastUpdate) > REFRESH_TIMEOUT_MS) {
             refresh();
         }
         loop();
-    }, 2000);
+    }, POLL_PERIOD_MS);
 }
 
 refresh();

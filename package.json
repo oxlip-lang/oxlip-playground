@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "homepage": "https://www.oxlip-lang.org",
   "dependencies": {
-    "oal-wasm": "file:../oal/oal-wasm/pkg",
+    "oal-wasm": "^0.1.0",
     "codejar": "^4.2.0",
     "prismjs": "^1.29.0"
   },
@@ -30,6 +30,7 @@
     "webpack-cli": "^5.1.0",
     "webpack-dev-server": "^4.15.1",
     "css-loader": "^6.8.1",
-    "style-loader": "^3.3.3"
+    "style-loader": "^3.3.3",
+    "raw-loader": "^4.0.2"
   }
 }

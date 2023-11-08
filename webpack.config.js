@@ -9,7 +9,10 @@ module.exports = {
   },
   mode: "production",
   module: {
-    rules: [{ test: /\.css$/, use: ['style-loader', 'css-loader'] }],
+    rules: [
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
   },
   plugins: [
     new CopyWebpackPlugin({

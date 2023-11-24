@@ -50,7 +50,7 @@ function refresh() {
     if (result.error === "") {
         outputJar.updateCode(result.api);
     }
-    diagnostics.innerHTML = result.error;
+    diagnostics.innerText = result.error;
 }
 
 function loop() {
